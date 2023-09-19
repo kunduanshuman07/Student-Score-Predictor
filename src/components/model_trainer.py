@@ -9,7 +9,7 @@ from catboost import CatBoostRegressor
 from xgboost import XGBRegressor
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import r2_score
-from dataclasses import dataclass
+from dataclasses import dataclass # type: ignore
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object, evaluate_models
@@ -57,8 +57,8 @@ class ModelTrainer:
             ]
             best_model = models[best_model_name]
 
-            if best_model_score<0.6:
-                raise CustomException("No best model found")
+            if best_model_score<0.6: # type: ignore
+                raise CustomException("No best model found") # type: ignore
             logging.info(f"Best found model on both training and testing dataset")
 
             save_object(
@@ -72,4 +72,4 @@ class ModelTrainer:
             return r2_square
         
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) # type: ignore
